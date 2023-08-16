@@ -40,22 +40,22 @@ export async function getServerSideProps() {
           Accept: 'application/json',
           'Notion-Version': '2022-02-22',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${TOKEN}`
+          Authorization: `Bearer ${TOKEN}`,
         },
         body: JSON.stringify({
             sorts: [
                 {
                     "property": "Name",
-                    "direction": "ascending"
+                    "direction": "ascending",
                 }
             ],
             page_size: 100
         })
       };
 
-    const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, options)
+    const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, options);
 
-    const projects = await res.json()
+    const projects = await res.json();
     
     const projectNames = projects.results?.map((aProject) =>(
         aProject.properties.Name.title[0].plain_text
